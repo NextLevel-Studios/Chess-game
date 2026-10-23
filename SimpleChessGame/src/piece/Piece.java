@@ -1,5 +1,6 @@
 package piece;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -148,7 +149,7 @@ public class Piece {
     	//when this piece is moving  up
     	for(int r = perRow-1; r>targetRow; r--) {
     		for(Piece piece : Gamepannel.simPieces) {
-    			if(piece.col == targetRow && piece.row == r) {
+    			if(piece.col == targetCol && piece.row == r) {
     				hittingP = piece;
     				return true;
     			}
@@ -157,7 +158,7 @@ public class Piece {
     	//when this piece is moving  down
     	for(int r = perRow+1; r<targetRow; r++) {
     		for(Piece piece : Gamepannel.simPieces) {
-    			if(piece.col == targetRow && piece.row == r) {
+    			if(piece.col == targetCol && piece.row == r) {
     				hittingP = piece;
     				return true;
     			}
@@ -217,7 +218,19 @@ public class Piece {
     }
     public void draw(Graphics2D g2) {
         if (image != null) {
-            g2.drawImage(image, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
+            // stand the piece on its square in the 3D view
+            double centerX = x + Board.HALF_SQUARE_SIZE;
+            double baseY = y + Board.SQUARE_SIZE * 0.85;
+            double scale = Board.scaleAt(Math.min(Math.max(baseY, 0), Board.FLAT_SIZE));
+            int size = (int)(Board.SQUARE_SIZE * scale * 1.15);
+            int sx = Board.projX(centerX, baseY);
+            int sy = Board.projY(Math.min(Math.max(baseY, 0), Board.FLAT_SIZE));
+            
+            // shadow
+            g2.setColor(new Color(0, 0, 0, 90));
+            g2.fillOval(sx - size/3, sy - size/10, size*2/3, size/5);
+            
+            g2.drawImage(image, sx - size/2, sy - size*9/10, size, size, null);
         }
     }
 }

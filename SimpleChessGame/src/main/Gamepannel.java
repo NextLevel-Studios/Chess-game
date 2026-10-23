@@ -428,7 +428,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		if(isValidMove(king, -1, 1)) {
 			return true;
 		}
-		if(isValidMove(king, 0, -1)) {
+		if(isValidMove(king, 0, 1)) {
 			return true;
 		}
 		if(isValidMove(king, 1, 1)) {
@@ -571,7 +571,10 @@ public class Gamepannel extends JPanel implements Runnable{
 		board.draw(g2);
 		
 		//piece
-		for(Piece p : simPieces) {
+		// draw back to front so the pieces in front overlap the ones behind
+		ArrayList<Piece> drawOrder = new ArrayList<>(simPieces);
+		drawOrder.sort((a, b) -> Integer.compare(a.y, b.y));
+		for(Piece p : drawOrder) {
 			p.draw(g2);
 		}
 		
@@ -580,14 +583,14 @@ public class Gamepannel extends JPanel implements Runnable{
 				if(isIllegal(activeP) == opponentCanCaptureKing()) {
 					g2.setColor(Color.gray);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-					g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
+					Board.fillSquare(g2, activeP.col, activeP.row);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 				}
 				else
 				{
 					g2.setColor(Color.white);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-					g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
+					Board.fillSquare(g2, activeP.col, activeP.row);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 				}
 			}

@@ -20,13 +20,23 @@ public class Mouse extends MouseAdapter {
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		x = e.getX();
-		y = e.getY();
+		setPosition(e);
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		x = e.getX();
-		y = e.getY();
+		setPosition(e);
+	}
+	
+	// convert the 3D board view back to flat game coordinates, the side panel stays as it is
+	private void setPosition(MouseEvent e) {
+		if(e.getX() < Board.FLAT_SIZE + 50) {
+			double flatY = Board.unprojY(e.getY());
+			x = (int)Board.unprojX(e.getX(), flatY);
+			y = (int)flatY;
+		}else {
+			x = e.getX();
+			y = e.getY();
+		}
 	}
 }
