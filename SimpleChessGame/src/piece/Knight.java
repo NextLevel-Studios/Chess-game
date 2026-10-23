@@ -17,6 +17,7 @@ public class Knight extends Piece {
 		}
 	}
 	
+	@Override
 	public boolean canMove(int targetCol, int targetRow) {
 		if(isWithinBoard(targetCol, targetRow)) {
 			if(Math.abs(targetCol - perCol) * Math.abs(targetRow - perRow) == 2) {

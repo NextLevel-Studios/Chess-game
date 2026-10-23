@@ -538,6 +538,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		g2.drawString("Start Game", START_BUTTON.x + 40, START_BUTTON.y + 60);
 	}
 	
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -611,7 +612,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 		
 		if(gameover) {
-			String s = "";
+			String s;
 			if(currentColor == WHITE) {
 				s = "White Wins";
 			}else {

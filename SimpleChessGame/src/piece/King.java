@@ -18,6 +18,7 @@ public class King extends Piece{
 	}
 
 	
+	@Override
 	public boolean canMove(int tragetCol, int tragetRow) {
 		
 		if(isWithinBoard(tragetCol, tragetRow)) {

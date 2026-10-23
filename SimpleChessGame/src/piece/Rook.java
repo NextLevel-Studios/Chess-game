@@ -18,6 +18,7 @@ public class Rook extends Piece{
 	}
 	
 	
+	@Override
 	public boolean canMove(int targetCol, int targetRow) {
 		if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
 			if(targetCol == perCol || targetRow == perRow) {
