@@ -6,35 +6,33 @@ https://github.com/user-attachments/assets/1c416e07-3445-47de-8319-f235ce85b09e
 
 # Chess Game
 
-A **Java-based Chess Game** built as part of a programming project to simulate the classic game of chess. This repository contains all the source code needed to run a simple chess game following standard chess rules.
-
-## 🧠 Overview
-
-This project implements a chess game where:
-
-* Two players can play against each other.
-* Chess pieces move according to real rules.
-* The game checks for legal moves and game progression.
-
-The goal is to demonstrate object-oriented design and game logic implementation using Java.
+A **Java chess game** for two players on one computer, drawn in a tilted 3D-style view with Java Swing. It follows the official FIDE Laws of Chess for how pieces move and how a game ends.
 
 ## 🧩 Features
 
-✔ Standard chess rules (piece movement, capturing) <br>
-✔ Turn-based gameplay for two players <br>
-✔ Console-based or basic GUI interface *(update this if GUI exists)* <br>
-✔ Clear project structure and reusable code <br>
+✔ 3D-style board: perspective view, pieces standing on their squares with shadows <br>
+✔ Start screen with a **Start Game** button <br>
+✔ Drag-and-drop moves with the mouse, turn-based for White and Black <br>
+✔ All piece moves, captures, **castling**, **en passant** and **pawn promotion** <br>
+✔ Check, **checkmate** and **stalemate** detection <br>
+✔ Illegal moves are refused (you can't leave your own king in check) <br>
+
+### Rules implemented (FIDE Laws of Chess)
+
+* **Castling (3.8):** not allowed if the king or rook has moved, if a piece is in between, or if the king is in check or passes through or lands on an attacked square.
+* **Check (3.9):** a move that leaves your own king attacked is not allowed. Check is detected from any piece, including discovered checks.
+* **Checkmate and stalemate (5.1, 5.2):** the game ends when the player to move has no legal move: checkmate if the king is in check, stalemate if not.
+
+Not implemented yet: draw by dead position, threefold repetition, the 50-move rule, the clock and notation.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-Make sure you have the following installed:
+* Java Development Kit (JDK) 11 or higher
+* Optionally a Java IDE (Eclipse, IntelliJ, VS Code, etc.)
 
-* Java Development Kit (JDK) 8 or higher
-* A Java IDE (Eclipse, IntelliJ, VS Code, etc.)
-
-### Installation
+### Run from the command line
 
 1. Clone the repository:
 
@@ -42,24 +40,40 @@ Make sure you have the following installed:
    git clone https://github.com/sathirapramudith123/Chess_Game-.git
    ```
 
-2. Open the project in your favorite Java IDE.
+2. Compile and run from the `SimpleChessGame` folder (Windows):
 
-3. Compile and run the main class (e.g., `Main.java` or similar).
+   ```powershell
+   cd SimpleChessGame
+   javac -d bin src/main/*.java src/piece/*.java
+   java -cp "bin;res" main.Main
+   ```
+
+   On macOS or Linux use `-cp "bin:res"` instead. The `res` folder holds the piece images, so it must be on the classpath.
+
+### Run from an IDE
+
+Import the `SimpleChessGame` folder (it contains Eclipse project files) and run `src/main/Main.java`.
 
 ## 🛠 How to Play
 
-* Start the game by running the main program.
-* Players enter moves via the console or by interacting with the board interface.
-* Follow chess rules to move pieces and capture opponents.
-
-*(If there’s a GUI, replace with instructions for clicking pieces.)*
+1. Click **Start Game**.
+2. White moves first. Press and hold a piece, drag it to a square and release.
+3. A valid square is highlighted grey while you drag. If you release on an invalid square the piece goes back.
+4. When a pawn reaches the last row, click a piece in the **Promote to** panel on the right.
+5. The game ends with "White Wins", "Black Wins" or "Stalemate".
 
 ## 📁 Project Structure
 
 ```
-/SimpleChessGame/   — Core Java project files  
-README.md          — This file  
-.gitignore         — Files to ignore in Git  
+SimpleChessGame/
+  src/main/Main.java        — Opens the window
+  src/main/Gamepannel.java  — Game loop, rules, check/checkmate/stalemate, drawing
+  src/main/Board.java       — 3D board drawing and perspective projection
+  src/main/Mouse.java       — Mouse input (converts the 3D view to board squares)
+  src/piece/                — Piece classes (Pawan, Rook, Knight, Bishop, Queen, King)
+  res/piece/                — Piece images
+README.md                   — This file
+.gitignore                  — Files to ignore in Git
 ```
 
 support for video    <a href="https://www.youtube.com/watch?v=jzCxywhTAUI">RyiSnow</a>
