@@ -29,7 +29,7 @@ Not implemented yet: draw by dead position, threefold repetition, the 50-move ru
 
 ### Prerequisites
 
-* Java Development Kit (JDK) 11 or higher
+* Java Development Kit (JDK) 11 or higher (the Eclipse project is set to Java 21)
 * Optionally a Java IDE (Eclipse, IntelliJ, VS Code, etc.)
 
 ### Run from the command line
@@ -72,8 +72,9 @@ SimpleChessGame/
   src/main/Mouse.java       — Mouse input (converts the 3D view to board squares)
   src/piece/                — Piece classes (Pawan, Rook, Knight, Bishop, Queen, King)
   res/piece/                — Piece images
+  bin/                      — Compiled classes (created by javac, not in Git)
 README.md                   — This file
-.gitignore                  — Files to ignore in Git
+.gitignore                  — Files to ignore in Git (build output, .claude/)
 ```
 
 support for video    <a href="https://www.youtube.com/watch?v=jzCxywhTAUI">RyiSnow</a>
