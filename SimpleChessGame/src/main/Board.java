@@ -16,9 +16,9 @@ public class Board {
 	public static final int FLAT_SIZE = SQUARE_SIZE * 8;
 	
 	// 3D view settings: the board is tilted back in perspective
-	public static final int TOP = 60;        // screen y of the far edge
-	public static final int HEIGHT_3D = 680; // screen height of the board
-	public static final double TILT = 0.8;   // how strongly the far edge shrinks
+	public static final int TOP = 50;        // screen y of the far edge
+	public static final int HEIGHT_3D = 690; // screen height of the board
+	public static final double TILT = 0.5;   // how strongly the far edge shrinks
 	public static final int THICKNESS = 24;  // front face height of the board
 	
 	// scale of the board at flat y (1.0 at the near edge)

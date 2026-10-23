@@ -30,36 +30,28 @@ public class King extends Piece{
 			}
 			
 			//castling
-			
+
 			if(moved == false) {
-				
-				//right castling
-				if(tragetCol == perCol + 2 && tragetRow == perRow && pieceIsOnStraightLine(tragetCol, tragetRow) == false) {
-					for(Piece piece : Gamepannel.simPieces) {
-						if(piece.col == perCol + 3 && piece.row == perRow && piece.moved == false) {
-							Gamepannel.castlingP = piece;
-							return true;
-						}
+
+				//right castling: the two squares next to the king must be empty
+				if(tragetCol == perCol + 2 && tragetRow == perRow && isEmpty(perCol + 1, perRow) && isEmpty(perCol + 2, perRow)) {
+					Piece rook = getPiece(perCol + 3, perRow);
+					if(rook != null && rook.type == Type.ROOK && rook.color == color && rook.moved == false) {
+						Gamepannel.castlingP = rook;
+						return true;
 					}
 				}
-				
-				//left castling
-				if(tragetCol == perCol - 2 && tragetRow == perRow && pieceIsOnStraightLine(tragetCol, tragetRow) == false) {
-					Piece p[] = new Piece[2];
-					for(Piece piece : Gamepannel.simPieces) {
-						if(piece.col == perCol - 3 && piece.row == tragetRow) {
-							p[0] = piece;
-						}
-						if(piece.col == perCol - 4 && piece.row == tragetRow) {
-							p[1] = piece;
-						}
-						if(p[0] == null && p[1] != null && p[1].moved == false) {
-							Gamepannel.castlingP = p[1];
-							return true;
-						}
+
+				//left castling: the three squares between the king and the rook must be empty
+				if(tragetCol == perCol - 2 && tragetRow == perRow && isEmpty(perCol - 1, perRow) && isEmpty(perCol - 2, perRow)
+						&& isEmpty(perCol - 3, perRow)) {
+					Piece rook = getPiece(perCol - 4, perRow);
+					if(rook != null && rook.type == Type.ROOK && rook.color == color && rook.moved == false) {
+						Gamepannel.castlingP = rook;
+						return true;
 					}
 				}
-				
+
 			}
 		}
 		return false;

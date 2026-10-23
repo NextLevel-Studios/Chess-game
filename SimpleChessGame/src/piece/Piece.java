@@ -112,6 +112,17 @@ public class Piece {
     	}
     	return null;
     }
+    public Piece getPiece(int targetCol, int targetRow) {
+    	for(Piece piece : Gamepannel.simPieces) {
+    		if(piece.col == targetCol && piece.row == targetRow && piece != this) {
+    			return piece;
+    		}
+    	}
+    	return null;
+    }
+    public boolean isEmpty(int targetCol, int targetRow) {
+    	return getPiece(targetCol, targetRow) == null;
+    }
     public boolean isVaildSquare(int targetCol, int targetRow) {
     	hittingP = getHittingP(targetCol, targetRow);
     	if(hittingP ==null) { //this square is can't
